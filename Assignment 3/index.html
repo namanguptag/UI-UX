@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SATONOVA - The Ultimate Fest</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>SATONOVA</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="schedule.html">Schedule</a></li>
+                    <li><a href="register.html">Register</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="contact.html">Contact & FAQs</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <div class="hero-content">
+                <h2>Experience the Extravaganza</h2>
+                <p>Welcome to SATONOVA 2025! Get ready for a thrilling two-day fest of tech, culture, and pure energy. This is where innovation meets art.</p>
+                <div class="countdown-container">
+                    <h3>The countdown is on!</h3>
+                    <div id="countdown" class="countdown"></div>
+                </div>
+                <a href="register.html" class="cta-button">Register Now!</a>
+            </div>
+        </section>
+
+        <section class="featured-events-section">
+            <div class="container">
+                <h2>Featured Competitions</h2>
+                <div class="event-grid">
+                    <div class="event-card" onclick="showEventDetails('CodeSpree', 'CodeSpree is a fast-paced coding competition where participants solve complex algorithmic problems against the clock. Test your logic and speed!', 'Individual or team of 2', 'INR 10,000 + goodies')">
+                        <h3>CodeSpree</h3>
+                        <p>Solve coding challenges and race against the clock. The ultimate test of logic and speed.</p>
+                        <a href="events.html" onclick="event.stopPropagation();">Learn More &gt;</a>
+                    </div>
+                    <div class="event-card" onclick="showEventDetails('Rhythm Revolt', 'A high-energy group dance competition. Showcase your synchrony and choreographic skills.', 'Group (Min 5, Max 10)', 'INR 12,000 + trophy')">
+                        <h3>Rhythm Revolt</h3>
+                        <p>Showcase your dance moves and mesmerize the crowd with your team's choreography.</p>
+                        <a href="events.html" onclick="event.stopPropagation();">Learn More &gt;</a>
+                    </div>
+                    <div class="event-card" onclick="showEventDetails('Robo Rumble', 'Design and build your own robot to battle it out in the arena. The last robot standing wins!', 'Team of 3-4', 'INR 15,000')">
+                        <h3>Robo Rumble</h3>
+                        <p>Engineer a powerful robot to compete in the ultimate battle for glory. May the best bot win!</p>
+                        <a href="events.html" onclick="event.stopPropagation();">Learn More &gt;</a>
+                    </div>
+                </div>
+                <div id="event-details-container" class="event-details-container">
+                    <div id="event-details-box" class="event-details-box">
+                        <button class="close-btn" onclick="hideEventDetails()">&times;</button>
+                        <h3 id="event-title"></h3>
+                        <p id="event-description"></p>
+                        <p><strong>Format:</strong> <span id="event-format"></span></p>
+                        <p><strong>Prizes:</strong> <span id="event-prizes"></span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 SATONOVA. All Rights Reserved.</p>
+            <div class="social-links">
+                <a href="#">Facebook</a> |
+                <a href="#">Instagram</a> |
+                <a href="#">Twitter</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Countdown Timer Script
+        const countdownDate = new Date("Oct 25, 2025 10:00:00").getTime();
+        const countdownElement = document.getElementById("countdown");
+
+        const updateCountdown = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = countdownDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+            if (distance < 0) {
+                clearInterval(updateCountdown);
+                countdownElement.innerHTML = "THE EVENT HAS BEGUN!";
+            }
+        }, 1000);
+
+        // Interactive Event Details Script
+        function showEventDetails(title, description, format, prizes) {
+            document.getElementById('event-title').innerText = title;
+            document.getElementById('event-description').innerText = description;
+            document.getElementById('event-format').innerText = format;
+            document.getElementById('event-prizes').innerText = prizes;
+            document.getElementById('event-details-container').style.display = 'flex';
+        }
+
+        function hideEventDetails() {
+            document.getElementById('event-details-container').style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>
