@@ -9,6 +9,12 @@
   --shadow-light: 0 4px 8px rgba(0,0,0,0.1);
 }
 
+/* ::selection pseudo-element for custom text highlighting */
+::selection {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
 body {
     font-family: 'Poppins', Arial, sans-serif;
     margin: 0;
@@ -24,7 +30,6 @@ body {
 header {
     background: var(--primary-color);
     color: #fff;
-    /* Changed padding for better vertical balance */
     padding: 15px 0;
     border-bottom: #0056b3 3px solid;
     position: sticky;
@@ -33,7 +38,7 @@ header {
 }
 
 header .container {
-    display: flex;
+    display: flex; /* Using Flexbox for alignment */
     justify-content: space-between;
     align-items: center;
     max-width: 1200px;
@@ -64,7 +69,7 @@ header nav a {
     transition: color 0.3s ease;
 }
 
-header nav a:hover {
+header nav a:hover { /* :hover pseudo-class */
     color: #ddd;
 }
 
@@ -75,19 +80,35 @@ main {
     padding: 20px 0;
 }
 
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
 /* Hero Section */
 .hero-section {
-    background: url('https://via.placeholder.com/1920x800?text=Event+Banner') no-repeat center center/cover;
-    height: 60vh;
-    display: flex;
+    position: relative;
+    height: 80vh;
+    display: flex; /* Flexbox for centering content */
     justify-content: center;
     align-items: center;
     text-align: center;
     color: #fff;
-    position: relative;
+    overflow: hidden;
 }
 
-.hero-section::before {
+.hero-banner-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+}
+
+.hero-section::before { /* ::before pseudo-element for overlay */
     content: '';
     position: absolute;
     top: 0;
@@ -95,6 +116,7 @@ main {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.6);
+    z-index: -1;
 }
 
 .hero-content {
@@ -141,10 +163,8 @@ main {
 }
 
 .cta-button:hover {
-    /* Adjusted hover to be a brighter version of the secondary color */
     filter: brightness(1.1);
 }
-
 
 /* Featured Events Section */
 .featured-events-section {
@@ -166,43 +186,67 @@ main {
     border-radius: 8px;
     box-shadow: var(--shadow-light);
     transition: transform 0.3s ease;
+    border: 1px solid #eee;
 }
 
 .event-card:hover {
     transform: translateY(-5px);
 }
 
-.event-card h3 {
-    color: var(--primary-color);
-    margin-top: 0;
+/* Video Section */
+.video-section {
+    padding: 40px 0;
+    text-align: center;
 }
-
-.event-card a {
-    color: var(--primary-color);
-    text-decoration: none;
-    font-weight: bold;
-}
-
-
-/* Generic Lists (Events) */
-.event-list {
-    list-style-type: none;
-    padding: 0;
-}
-
-.event-list li {
-    background: #fff;
+.intro-paragraph {
     margin-bottom: 20px;
+}
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+    background: #000;
+    border-radius: 8px;
+}
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Gallery Page - Using CSS Grid */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 15px;
+}
+.gallery-grid img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: var(--shadow-light);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.gallery-grid img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+/* Schedule Page - Audio Player */
+.audio-guide {
+    background: #fff;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-light);
 }
 
-.event-list h3 {
-    color: var(--primary-color);
-}
-
-/* Tables (Schedule/Results) */
+/* Tables (Schedule) */
 .schedule-table {
     width: 100%;
     border-collapse: collapse;
@@ -211,125 +255,59 @@ main {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     overflow: hidden;
 }
-
 .schedule-table th, .schedule-table td {
     padding: 12px 15px;
     border: 1px solid #ddd;
     text-align: left;
 }
-
 .schedule-table th {
     background-color: var(--primary-color);
     color: #fff;
 }
-
-.schedule-table tbody tr:nth-child(even) {
+.schedule-table tbody tr:nth-child(even) { /* :nth-child pseudo-class */
     background-color: #f2f2f2;
 }
 
-/* Forms (Registration) */
-.registration-form {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
+/* Forms (Registration & Contact) */
 .form-group {
     margin-bottom: 15px;
 }
-
+.form-group:last-child { /* :last-child pseudo-class */
+    margin-bottom: 0;
+}
 .form-group label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
 }
-
 .form-group input, .form-group select, .form-group textarea {
     width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
     box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
-
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { /* :focus pseudo-class */
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
 .form-group button {
     background: var(--primary-color);
     color: #fff;
-    border: none;
     padding: 12px 20px;
-    font-size: 16px;
+    border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+.form-group button:hover {
+    background-color: #0056b3;
 }
 
-/* Photo Gallery */
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 15px;
-}
-
-.gallery-grid img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
-
-/* =================================
-   Components
-   ================================= */
-
-/* Event Details Pop-up */
-.event-details-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    display: none; /* Hidden by default */
-    justify-content: center;
-    align-items: center;
-    z-index: 100;
-}
-
-.event-details-box {
-    background: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    position: relative;
-    max-width: 500px;
-    text-align: left;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-}
-
-.event-details-box h3 {
-    color: var(--primary-color);
-    margin-top: 0;
-}
-
-.close-btn {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 2em;
-    font-weight: bold;
-    color: #888;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-}
-
-.close-btn:hover {
-    color: #333;
-}
-
-/* =================================
-   Footer
-   ================================= */
+/* Footer */
 footer {
     background: #333;
     color: #fff;
@@ -337,109 +315,36 @@ footer {
     padding: 20px 0;
     margin-top: 20px;
 }
-
 footer .social-links a {
     color: #fff;
-    font-size: 24px;
-    margin: 0 10px;
     text-decoration: none;
+    margin: 0 10px;
+}
+/* Attribute selector for social links */
+.social-links a[href="#"] {
+    cursor: not-allowed;
+    opacity: 0.7;
 }
 
-
 /* =================================
-   Media Queries
+   Responsiveness - Media Queries
    ================================= */
 @media (max-width: 768px) {
-  .hero-content h2 {
-    font-size: 2em;
-  }
-  .event-grid {
-    grid-template-columns: 1fr;
-  }
-  header .container {
-    flex-direction: column;
-    /* This ensures items are centered together when stacked */
-    justify-content: center;
-    gap: 10px; /* Adds a little space between title and nav */
-  }
-}
-
-/* =================================
-   Contact & FAQ Page Styles
-   ================================= */
-
-/* General container for content pages */
-.page-content {
-    background: #fff;
-    padding: 30px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    box-shadow: var(--shadow-light);
-}
-
-.page-content h2 {
-    text-align: center;
-    color: var(--primary-color);
-    margin-bottom: 30px;
-}
-
-.contact-info ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.contact-info li {
-    margin-bottom: 10px;
-    font-size: 1.1em;
-}
-
-/* Re-using .registration-form class for the contact form */
-.contact-form, .contact-info, .faq-section {
-    margin-bottom: 40px;
-}
-
-/* FAQ Accordion Styles */
-.faq-section h3, .contact-info h3, .contact-form h3 {
-    border-bottom: 2px solid var(--primary-color);
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-    color: var(--primary-color);
-}
-
-.faq-item {
-    border-bottom: 1px solid #ddd;
-    padding: 15px 0;
-}
-
-.faq-question {
-    font-weight: bold;
-    font-size: 1.2em;
-    cursor: pointer;
-    position: relative;
-    list-style: none; /* Hide the default arrow */
-}
-
-/* Custom Arrow Icon */
-.faq-question::after {
-    content: '+';
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 1.5em;
-    color: var(--primary-color);
-    transition: transform 0.3s ease;
-}
-
-/* Change icon when FAQ is open */
-.faq-item[open] .faq-question::after {
-    content: '−';
-    transform: translateY(-50%) rotate(180deg);
-}
-
-.faq-answer {
-    padding: 15px 10px 0 10px;
-    margin: 0;
-    line-height: 1.7;
+    header .container {
+        flex-direction: column;
+    }
+    header nav ul {
+        text-align: center;
+        margin-top: 10px;
+    }
+    header nav li {
+        display: block;
+        padding: 8px 0;
+    }
+    .hero-content h2 {
+        font-size: 2.2em;
+    }
+    .event-grid, .gallery-grid {
+        grid-template-columns: 1fr; /* Stack cards vertically on smaller screens */
+    }
 }

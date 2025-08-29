@@ -27,14 +27,10 @@
 
     <main>
         <section class="hero-section">
+            <img src="back-view-crowd-fans-watching-live-performance-music-concert-night-copy-space.jpg" alt="Vibrant music festival with a cheering crowd" class="hero-banner-image">
             <div class="hero-content">
                 <h2>Experience the Extravaganza</h2>
                 <p>Welcome to SATONOVA 2025! Get ready for a thrilling two-day fest of tech, culture, and pure energy. This is where innovation meets art.</p>
-                <div class="countdown-container">
-                    <h3>The countdown is on!</h3>
-                    <div id="countdown" class="countdown"></div>
-                </div>
-                <a href="register.html" class="cta-button">Register Now!</a>
             </div>
         </section>
 
@@ -69,6 +65,23 @@
                 </div>
             </div>
         </section>
+        
+        <section class="video-section">
+            <div class="container">
+                <h2>Event Highlights</h2>
+                <p class="intro-paragraph">Check out the best moments from our previous events!</p>
+                <div class="video-wrapper">
+                    <iframe 
+                        src="https://www.youtube.com/embed/z9bZufPHFLU" 
+                        title="YouTube video player" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <footer>
@@ -83,27 +96,6 @@
     </footer>
 
     <script>
-        // Countdown Timer Script
-        const countdownDate = new Date("Oct 25, 2025 10:00:00").getTime();
-        const countdownElement = document.getElementById("countdown");
-
-        const updateCountdown = setInterval(function() {
-            const now = new Date().getTime();
-            const distance = countdownDate - now;
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-
-            if (distance < 0) {
-                clearInterval(updateCountdown);
-                countdownElement.innerHTML = "THE EVENT HAS BEGUN!";
-            }
-        }, 1000);
-
         // Interactive Event Details Script
         function showEventDetails(title, description, format, prizes) {
             document.getElementById('event-title').innerText = title;
